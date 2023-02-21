@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title> @yield('title', 'Admin - Projects')</title>
 
 
     <!-- Fonts -->
@@ -47,8 +47,7 @@
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            {{-- @dd('route') --}}
-                            <a class="nav-link" href="#">{{ __('Projects') }}</a>
+                            <a class="nav-link" href="{{url('/admin/projects/resources') }}">Projects</a>
                         </li>
                     </ul>
 
@@ -57,6 +56,7 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
+                            @dd('route')
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
