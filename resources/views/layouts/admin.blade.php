@@ -46,6 +46,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
+                        <li class="nav-item">
+                            {{-- @dd('route') --}}
+                            <a class="nav-link" href="#">{{ __('Projects') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -88,6 +92,7 @@
         <main class="">
             @yield('content')
         </main>
+        
     </div>
 </body>
 
