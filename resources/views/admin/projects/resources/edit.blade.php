@@ -1,16 +1,13 @@
 @extends('layouts.admin')
-
+@section('title', "Admin - edit $project->name")
 @section('content')
-<div class="container">
-    <h2 class="fs-4 text-secondary my-4">
-        {{ __('Dashboard') }}
-    </h2>
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <h1>edit</h1>
+<div class="container mt-5">
+    <div class="row">
+            <div class="col-12">
+                <div id="edit">
+                    @include('admin.partials.form', ['route' => 'admin.project.update', 'method' => 'PUT', 'project' => $project])
+                </div>
             </div>
-        </div>
     </div>
 </div>
 @endsection

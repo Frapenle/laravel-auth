@@ -60,7 +60,7 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.resources.edit', compact('project'));
     }
 
     /**
