@@ -1,4 +1,5 @@
-<form action="{{route($route, $project->id)}}" method="POST" class="mb-3" name="project-form">
+
+<form id="{{$idForm}}" action="{{route($route, $project->id)}}" method="POST" class="mb-3" name={{$idForm}}>
 @csrf
 @method($method)
 
@@ -60,3 +61,6 @@
     </button>
 
 </form>
+@section('script')
+    @vite('resources/js/confirm-delete.js')
+@endsection

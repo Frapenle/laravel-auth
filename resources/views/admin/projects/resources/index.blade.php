@@ -5,12 +5,12 @@
             <div class="col-12">
                 <div class="controllers w-100 d-flex gap-2">
                     <a href="{{route('admin.projects.create')}}" class="h-50 btn btn-outline-success fw-bold sticky-top">Nuovo progetto</a>
-                    <a href="{{route('admin.projects.trashed')}}" class="h-50 btn btn-outline-secondary fw-bold sticky-top"><i class="fa-solid fa-trash"></i>{{$trashed}}</a>
                     @if (session('message'))
                     <div class="my-alert message alert text-center flex-grow-1 {{session('alert-type')}}">
                         <span>{{session('message')}}</span>
                     </div>
                     @endif
+                    <a href="{{route('admin.projects.trashed')}}" class="ms-auto h-50 btn btn-outline-secondary fw-bold sticky-top"><i class="fa-solid fa-trash fa-xl"></i>@if($trashed>0)&nbsp;{{$trashed}}@endif</a>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                                         @method('DELETE')
                                         <a class="btn btn-sm btn-success" href="{{route('admin.projects.show', $project->id)}}">Show</a>
                                         <a class="btn btn-sm btn-warning" href="{{route('admin.projects.edit', $project->id)}}">Edit</a>
-                                        <button type="submit" class="btn btn-sm btn-danger" href="{{route('admin.projects.destroy', $project->id)}}" onclick="return confirm('Attenzione, sei sicuro di voler eliminare questo record?')">Delete</button>
+                                        <button title="Cancella" type="submit" class="btn btn-sm btn-danger" href="{{route('admin.projects.destroy', $project->id)}}">Delete</button>
                                     </form>
                                 </td>
                             </tr>

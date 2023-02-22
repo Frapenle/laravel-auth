@@ -17,7 +17,10 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
-</head>
+    {{-- sweet alert cdn --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+    </head>
 
 <body>
     <div id="app">

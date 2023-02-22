@@ -21,7 +21,7 @@
                 @csrf
                 @method('DELETE')
                     <a class="btn btn-warning btn-sm" href="{{route('admin.projects.edit', $project->id)}}">Edit</a>
-                    <button type="submit" class="btn btn-danger btn-sm" href="{{route('admin.projects.destroy', $project->id)}}" onclick="return confirm('Attenzione, sei sicuro di voler eliminare questo record?')">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm" href="{{route('admin.projects.destroy', $project->id)}}">Delete</button>
                     <a href="{{route('admin.projects.index')}}" class="btn btn-primary btn-sm">Back</a>
             </form>
             </div>

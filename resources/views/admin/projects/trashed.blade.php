@@ -54,11 +54,11 @@
                                 {{-- <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->start_date)->format('Y-m-d') }} </td> --}}
                                 <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->update)->format('Y-m-d  H:i') }} </td>
                                 <td style="width: 250px;" class="text-end">
-                                    <form action="{{route('admin.projects.forceDelete', $project->id)}}" method="POST">
+                                    <form action="{{route('admin.projects.forceDelete', $project->id)}}" method="POST" class="double-confirm">
                                         @csrf
                                         @method('DELETE')
                                         <a class="btn btn-sm btn-secondary" href="{{route('admin.projects.restore', $project->id)}}">Restore</a>
-                                        <button type="submit" class="btn btn-sm btn-danger" href="{{route('admin.projects.destroy', $project->id)}}" onclick="return confirm('Attenzione, il record verrà eliminato in modo definitivo')">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" href="{{route('admin.projects.destroy', $project->id)}}" title="Cancella">Delete</button>
                                     </form>
                                 </td>
                             </tr>
