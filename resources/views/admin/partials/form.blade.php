@@ -1,6 +1,19 @@
 <form action="{{route($route, $project->id)}}" method="POST" class="mb-3" name="project-form">
 @csrf
 @method($method)
+
+@if ($errors->any())
+        
+    <div class="alert alert-danger">
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>
+                {{$error}}
+            </li>
+        @endforeach
+        </ul>
+    </div>
+    @endif
     
     <div class="mb-4">
         <label for="name" class="form-label">Name</label>

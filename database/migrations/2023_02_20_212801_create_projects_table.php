@@ -34,7 +34,7 @@ return new class extends Migration
             $table->datetime('update');
             $table->string('preview', 255);
             $table->string('authors', 255);
-            $table->string('licence', 255)->nullable();
+            $table->string('license', 255)->nullable();
             $table->string('program_lang', 100)->nullable();
             $table->string('frameworks', 100)->nullable();
             $table->string('github_url', 255)->nullable();

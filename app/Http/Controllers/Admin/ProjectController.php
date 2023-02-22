@@ -12,13 +12,13 @@ class ProjectController extends Controller
     // <<<<<<<<< validation rules >>>>>>>>>>>>
     // ======== da aggiornare =========
     protected $rules = [
-        'name' => ['required', 'unique', 'max: 25'],
+        'name' => ['required', 'unique:projects,name', 'max: 25'],
         'description' => ['max: 1000'],
         'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
-        'update' => ['datetime', 'after: start_date', 'before:today', 'required'],
-        'preview' => ['max: 255', 'default: Preview non disponibile'],
+        'update' => ['date', 'after: start_date', 'before:today', 'required'],
+        'preview' => ['max: 255'],
         'authors' => ['required', 'max: 255', 'min: 2'],
-        'license' => ['min: 2', 'max:255'],
+        'license' => ['max:255'],
         'program_lang' => ['min: 2', 'max: 100'],
         'frameworks' => ['min: 2', 'max: 100'],
         'github_url' => ['max: 255', 'url']
@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
-        return redirect()->route('admin.projects.resources.index');
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -101,11 +101,11 @@ class ProjectController extends Controller
         $data = $request->all();
         //creo nuova regola per i campi unique della validation aggiungendola a quelle gia esistenti
         $newRules = $this->rules;
-        $newRules['name'] = ['required', 'unique', 'max: 25', Rule::unique('projects')->ignore($project->name)];
+        $newRules['name'] = ['required', Rule::unique('projects')->ignore($project->name), 'max: 25'];
         //richiedo validazione con le nuove regole
-        $request->validate($newRules, 'project-form');
+        $request->validate($newRules);
         $project->update($data);
-        return redirect()->route('admin.projects.resources.index');
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -117,7 +117,8 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return view('admin.projects.resources.index');
+        $message = "{$project->name} è stato eliminato";
+        return view('admin.projects.resources.index')->with('message', $message);
     }
 
     public function trashed()
@@ -131,6 +132,8 @@ class ProjectController extends Controller
     {
         $project = Project::onlyTrashed()->find($id);
         $project->forceDelete();
-        return redirect()->route('admin.projects.trashed');
+        $message = "{$project->name} è stato ripristinato";
+        $message = "{$project->title} è stato eliminato dal db";
+        return redirect()->route('admin.projects.trashed')->with('message', $message);
     }
 }

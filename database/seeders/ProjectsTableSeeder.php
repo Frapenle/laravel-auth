@@ -37,7 +37,7 @@ class ProjectsTableSeeder extends Seeder
                 'update' => fake()->dateTime(),
                 'preview' => fake()->imageUrl(),
                 'authors' => fake()->name(),
-                'licence' => fake()->randomElement(['Open Source', 'Creative Commons', 'Shareware', 'Freeware', null]),
+                'license' => fake()->randomElement(['Open Source', 'Creative Commons', 'Shareware', 'Freeware', null]),
                 'program_lang' => fake()->randomElement(['PHP', 'JavaScript', 'Python', 'C', 'Java', 'C++', 'Ruby', 'Swift', 'Rust', 'Kotlin', 'Go', null]),
                 'frameworks' => fake()->randomElement(['Laravel', 'React', 'Django', 'Flask', 'VueJs', 'Angular', 'Bootstrap', null]),
                 'github_url' => fake()->url(),
