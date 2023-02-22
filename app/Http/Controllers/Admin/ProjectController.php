@@ -31,8 +31,10 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('admin.projects.resources.index', compact('projects'));
-        // return 'sono la pagina projects';
+        // metodo per visualizzare il  numero di elementi nel btn cestino
+        $trashed = Project::onlyTrashed()->get()->count();
+
+        return view('admin.projects.resources.index', compact('projects', 'trashed'));
     }
 
     /**

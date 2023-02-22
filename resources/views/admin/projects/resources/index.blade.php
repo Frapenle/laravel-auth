@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="controllers w-100 d-flex gap-2">
                     <a href="{{route('admin.projects.create')}}" class="h-50 btn btn-outline-success fw-bold sticky-top">Nuovo progetto</a>
-                    <a href="{{route('admin.projects.trashed')}}" class="h-50 btn btn-outline-secondary fw-bold sticky-top">Cestino</a>
+                    <a href="{{route('admin.projects.trashed')}}" class="h-50 btn btn-outline-secondary fw-bold sticky-top"><i class="fa-solid fa-trash"></i>{{$trashed}}</a>
                     @if (session('message'))
                     <div class="my-alert message alert text-center flex-grow-1 {{session('alert-type')}}">
                         <span>{{session('message')}}</span>

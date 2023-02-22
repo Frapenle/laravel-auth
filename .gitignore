@@ -16,3 +16,14 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+tests/.DS_Store
+storage/.DS_Store
+.gitignore
+lang/.DS_Store
+.gitignore
+resources/views/.DS_Store
+resources/.DS_Store
+.gitignore
+storage/framework/.DS_Store
+database/.DS_Store
+.DS_Store
