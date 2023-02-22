@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
-use App\Http\Controllers\Admin\ProjectsController as AdminProjectsController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +36,11 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('trashed', [AdminProjectsController::class, 'trashed'])->name('projects.trashed');
-        Route::delete('projects/force-delete/{id}', [AdminProjectsController::class, 'forceDelete'])->name('projects.forceDelete');
-        Route::get('projects/restore/{id}', [AdminProjectsController::class, 'restoreDeleted'])->name('projects.restore');
+        Route::get('trashed', [AdminProjectController::class, 'trashed'])->name('projects.trashed');
+        Route::delete('projects/force-delete/{id}', [AdminProjectController::class, 'forceDelete'])->name('projects.forceDelete');
+        Route::get('projects/restore/{id}', [AdminProjectController::class, 'restoreDeleted'])->name('projects.restore');
 
-        Route::resource('/projects', AdminProjectsController::class);
+        Route::resource('/projects', AdminProjectController::class);
     });
 
 require __DIR__ . '/auth.php';

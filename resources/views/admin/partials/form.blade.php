@@ -1,4 +1,4 @@
-<form action="{{route($route, $project->id)}}" method="POST" class="mb-3">
+<form action="{{route($route, $project->id)}}" method="POST" class="mb-3" name="project-form">
 @csrf
 @method($method)
     
