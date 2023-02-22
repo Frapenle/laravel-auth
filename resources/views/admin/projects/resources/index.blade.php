@@ -1,8 +1,25 @@
 @extends('layouts.admin')
+@section('buttons')
+    <div class="container-fluid">
+        <div class="row w-100 d-flex mt-2">
+            <div class="col-12">
+                <div class="controllers w-100 d-flex gap-2">
+                    <a href="{{route('admin.projects.create')}}" class="h-50 btn btn-outline-success fw-bold sticky-top">Nuovo progetto</a>
+                    <a href="{{route('admin.projects.trashed')}}" class="h-50 btn btn-outline-secondary fw-bold sticky-top">Cestino</a>
+                    @if (session('message'))
+                    <div class="message alert alert-danger text-center flex-grow-1">
+                        <span>{{session('message')}}</span>
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
 <section id="index">
     <div class="container-fluid">
-        <div class="row w-100 mt-5">
+        <div class="row w-100 mt-2">
             <div class="col-12">
                 <table class="table table-striped table-hover table-warning">
                     <thead class="table-success-dark">

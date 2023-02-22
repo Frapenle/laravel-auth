@@ -15,7 +15,7 @@ class ProjectController extends Controller
         'name' => ['required', 'unique:projects,name', 'max: 25'],
         'description' => ['max: 1000'],
         'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
-        'update' => ['date', 'after: start_date', 'before:today', 'required'],
+        'update' => ['date', 'after: start_date', 'before:today'],
         'preview' => ['max: 255'],
         'authors' => ['required', 'max: 255', 'min: 2'],
         'license' => ['max:255'],
@@ -121,9 +121,17 @@ class ProjectController extends Controller
         return view('admin.projects.resources.index')->with('message', $message);
     }
 
+    public function restoreDeleted($id)
+    {
+        $project = Project::onlyTrashed()->find($id);
+        $project->restore();
+        $message = "{$project->name} è stato ripristinato";
+        return redirect()->route('admin.projects.trashed')->with('message', $message);
+    }
+
     public function trashed()
     {
-        $project = Project::onlyTrashed()->get();
+        $projects = Project::onlyTrashed()->get();
 
         return view('admin.projects.trashed', compact('projects'));
     }
@@ -134,6 +142,6 @@ class ProjectController extends Controller
         $project->forceDelete();
         $message = "{$project->name} è stato ripristinato";
         $message = "{$project->title} è stato eliminato dal db";
-        return redirect()->route('admin.projects.trashed')->with('message', $message);
+        return redirect()->route('admin.trashed')->with('message', $message);
     }
 }

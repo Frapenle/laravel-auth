@@ -89,6 +89,10 @@
             </div>
         </nav>
 
+        <section id="buttons">
+            @yield('buttons')
+        </section>
+
         <main class="">
             @yield('content')
         </main>

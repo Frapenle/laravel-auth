@@ -1,6 +1,23 @@
 @extends('layouts.admin')
 @section('content')
 <section id="trashed">
+    <div class="row">
+        <div class="col-12">
+            <div class="messages d-flex">
+                <h1 class="">Cestino</h1>
+                @if (session('message'))
+                <div class="message alert alert-primary text-center flex-grow-1">
+                    <span>{{session('message')}}</span>
+                </div>
+                @endif
+                @if (session('deleteMessage'))
+                <div class="message alert alert-danger text-center flex-grow-1">
+                    <span>{{session('deleteMessage')}}</span>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row w-100 mt-5">
             <div class="col-12">
@@ -36,12 +53,11 @@
                                 {{-- <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->start_date)->format('Y-m-d') }} </td> --}}
                                 <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->update)->format('Y-m-d  H:i') }} </td>
                                 <td style="width: 250px;" class="text-end">
-                                    <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+                                    <form action="{{route('admin.projects.forceDelete', $project->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <a class="btn btn-sm btn-success" href="{{route('admin.projects.show', $project->id)}}">Show</a>
-                                        <a class="btn btn-sm btn-warning" href="{{route('admin.projects.edit', $project->id)}}">Edit</a>
-                                        <button type="submit" class="btn btn-sm btn-danger" href="{{route('admin.projects.destroy', $project->id)}}" onclick="return confirm('Attenzione, sei sicuro di voler eliminare questo record?')">Delete</button>
+                                        <a class="btn btn-sm btn-secondary" href="{{route('admin.projects.restore', $project->id)}}">Restore</a>
+                                        <button type="submit" class="btn btn-sm btn-danger" href="{{route('admin.projects.destroy', $project->id)}}" onclick="return confirm('Attenzione, il record verrà eliminato in modo definitivo')">Delete</button>
                                     </form>
                                 </td>
                             </tr>

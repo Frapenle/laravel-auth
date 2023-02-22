@@ -49,11 +49,11 @@
     </div>
     <div class="mb-4">
         <label for="start_date" class="form-label">Creation date</label>
-        <input name="start_date" type="text" class="form-control" id="type" value={{ old('start_date', $project->start_date) }}>
+        <input name="start_date" type="date" class="form-control" id="type" value={{ old('start_date', $project->start_date) }}>
     </div>
     <div class="mb-4">
         <label for="update" class="form-label">Update</label>
-        <input name="update" type="text" class="form-control" id="type" value={{ old('update', $project->update) }}>
+        <input name="update" type="date" class="form-control" id="type" value={{ old('update', $project->update) }}>
     </div>
     <button type="submit" class="btn {{ $method == 'PUT' ? 'btn-warning' : 'btn-success' }}">
     {{ $method == 'PUT' ? 'Modifica' : 'Aggiungi' }}
