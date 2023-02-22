@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-<section id="index">
+<section id="trashed">
     <div class="container-fluid">
         <div class="row w-100 mt-5">
             <div class="col-12">

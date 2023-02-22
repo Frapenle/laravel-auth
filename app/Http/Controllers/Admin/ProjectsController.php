@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use illuminate\Validation\Rule;
 
 class ProjectsController extends Controller
 {
@@ -115,6 +116,22 @@ class ProjectsController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return view('admin.projects.index');
+    }
+
+    public function trashed()
+    {
+        $project = Project::onlyTrashed()->get();
+
+        return view('admin.projects.trashed', compact('projects'));
+    }
+
+    public function forceDelete($id)
+    {
+        Project::onlyTrashed()->find($id);
+        $project = Project::onlyTrashed()->find($id);
+        $project->forceDelete();
+        return redirect()->route('admin.projects.trashed');
     }
 }

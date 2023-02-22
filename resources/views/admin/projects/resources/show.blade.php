@@ -17,12 +17,12 @@
                 <p><span class="fw-bold">Creation date</span>: {{$project->start_date}} </p>
                 <p><span class="fw-bold">Last update</span>: {{$project->update}} </p>
                 {{-- inserire pulsanti --}}
-                <form action="{{route('admin.project.destroy', $project->id)}}" method="POST">
+                <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                    <a class="btn btn-warning btn-sm" href="{{route('admin.project.edit', $project->id)}}">Edit</a>
-                    <button type="submit" class="btn btn-danger btn-sm" href="{{route('admin.project.destroy', $project->id)}}" onclick="return confirm('Attenzione, sei sicuro di voler eliminare questo record?')">Delete</button>
-                    <a href="{{route('admin.project.index')}}" class="btn btn-primary btn-sm">Back</a>
+                    <a class="btn btn-warning btn-sm" href="{{route('admin.projects.edit', $project->id)}}">Edit</a>
+                    <button type="submit" class="btn btn-danger btn-sm" href="{{route('admin.projects.destroy', $project->id)}}" onclick="return confirm('Attenzione, sei sicuro di voler eliminare questo record?')">Delete</button>
+                    <a href="{{route('admin.projects.index')}}" class="btn btn-primary btn-sm">Back</a>
             </form>
             </div>
         </div>
