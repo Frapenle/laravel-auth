@@ -101,11 +101,11 @@ class ProjectsController extends Controller
         $data = $request->all();
         //creo nuova regola per i campi unique della validation aggiungendola a quelle gia esistenti
         $newRules = $this->rules;
-        $newRules['name'] = ['required', 'unique', 'max: 25', Rule::unique('projects')->ignore('$project->name')];
+        $newRules['name'] = ['required', 'unique', 'max: 25', Rule::unique('projects')->ignore($project->name)];
         //richiedo validazione con le nuove regole
         $request->validate($newRules);
         $project->update($data);
-        return redirect() - route('admin.projects.resources.index');
+        return redirect()->route('admin.projects.resources.index');
     }
 
     /**
@@ -117,7 +117,7 @@ class ProjectsController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return view('admin.projects.index');
+        return view('admin.projects.resources.index');
     }
 
     public function trashed()
@@ -129,7 +129,6 @@ class ProjectsController extends Controller
 
     public function forceDelete($id)
     {
-        Project::onlyTrashed()->find($id);
         $project = Project::onlyTrashed()->find($id);
         $project->forceDelete();
         return redirect()->route('admin.projects.trashed');

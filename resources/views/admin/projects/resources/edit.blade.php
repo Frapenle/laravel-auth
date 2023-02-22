@@ -5,7 +5,7 @@
     <div class="row">
             <div class="col-12">
                 <div id="edit">
-                    @include('admin.partials.form', ['route' => 'admin.project.update', 'method' => 'PUT', 'project' => $project])
+                    @include('admin.partials.form', ['route' => 'admin.projects.update', 'method' => 'PUT', 'project' => $project])
                 </div>
             </div>
     </div>

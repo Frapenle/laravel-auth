@@ -1,4 +1,4 @@
-<form action="" method="POST" class="mb-3">
+<form action="{{route($route, $project->id)}}" method="POST" class="mb-3">
 @csrf
 @method($method)
     
@@ -42,8 +42,8 @@
         <label for="update" class="form-label">Update</label>
         <input name="update" type="text" class="form-control" id="type" value={{ old('update', $project->update) }}>
     </div>
-    {{-- <button type="submit" class="btn {{ $method == 'PUT' ? 'btn-warning' : 'btn-success' }}">
+    <button type="submit" class="btn {{ $method == 'PUT' ? 'btn-warning' : 'btn-success' }}">
     {{ $method == 'PUT' ? 'Modifica' : 'Aggiungi' }}
-    </button> --}}
+    </button>
 
 </form>
