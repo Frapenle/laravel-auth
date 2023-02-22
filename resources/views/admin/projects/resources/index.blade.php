@@ -53,12 +53,12 @@
                                 {{-- <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->start_date)->format('Y-m-d') }} </td> --}}
                                 <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->update)->format('Y-m-d  H:i') }} </td>
                                 <td style="width: 250px;" class="text-end">
-                                    <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+                                    <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="delete">
                                         @csrf
                                         @method('DELETE')
                                         <a class="btn btn-sm btn-success" href="{{route('admin.projects.show', $project->id)}}">Show</a>
                                         <a class="btn btn-sm btn-warning" href="{{route('admin.projects.edit', $project->id)}}">Edit</a>
-                                        <button title="Cancella" type="submit" class="btn btn-sm btn-danger" href="{{route('admin.projects.destroy', $project->id)}}">Delete</button>
+                                        <button title="Cancella" type="submit" class="btn btn-sm btn-danger confirm" href="{{route('admin.projects.destroy', $project->id)}}">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -76,4 +76,7 @@
     </div>
 
 </section>
+@endsection
+@section('script')
+    @vite('resources/js/confirm-delete.js')
 @endsection
