@@ -1,1 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
+
+.my-alert {
+    padding: 7px 10px;
+    font-weight: bold;
+}
+
+.text-small {
+    font-size: .9rem !important;
+}

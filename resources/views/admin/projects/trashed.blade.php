@@ -1,27 +1,27 @@
 @extends('layouts.admin')
 @section('content')
 <section id="trashed">
-    <div class="row">
-        <div class="col-12">
-            <div class="messages d-flex">
-                <h1 class="">Cestino</h1>
-                @if (session('message'))
-                <div class="message alert alert-primary text-center flex-grow-1">
-                    <span>{{session('message')}}</span>
+    @section('buttons')
+        <div class="container-fluid">
+            <div class="row w-100 d-flex mt-2">
+                <div class="col-12">
+                    <div class="controllers w-100 d-flex gap-2">
+                        @if (session('message'))
+                        <div class="my-alert message alert text-center flex-grow-1 {{session('alert-type')}}">
+                            <span>{{session('message')}}</span>
+                        </div>
+                        @endif
+                        <a href="{{route('admin.projects.index')}}" class="ms-auto h-50 btn btn-outline-primary fw-bold sticky-top">Back</a>
+                    </div>
                 </div>
-                @endif
-                @if (session('deleteMessage'))
-                <div class="message alert alert-danger text-center flex-grow-1">
-                    <span>{{session('deleteMessage')}}</span>
-                </div>
-                @endif
             </div>
         </div>
-    </div>
+    @endsection
     <div class="container-fluid">
-        <div class="row w-100 mt-5">
+        <div class="row w-100 mt-2">
             <div class="col-12">
                 <table class="table table-striped table-hover table-warning">
+                    @if(isset($project))
                     <thead class="table-success-dark">
                         <tr>
                         <th scope="col">Id</th>
@@ -38,6 +38,7 @@
                         <th scope="col" class="text-center" style="width: 250px;">Action</th>
                         </tr>
                     </thead>
+                    @endif
                     <tbody class="text-small">
                         @forelse ($projects as $project)
                             <tr>
@@ -64,7 +65,7 @@
                         @empty
                         <table>
                             <tr>
-                                <td id="empty" colspan="6"> No projects available </td>
+                                <td id="empty" colspan="6"> Il cestino è vuoto </td>
                             </tr>
                         </table>
                         @endforelse

@@ -7,7 +7,7 @@
                     <a href="{{route('admin.projects.create')}}" class="h-50 btn btn-outline-success fw-bold sticky-top">Nuovo progetto</a>
                     <a href="{{route('admin.projects.trashed')}}" class="h-50 btn btn-outline-secondary fw-bold sticky-top">Cestino</a>
                     @if (session('message'))
-                    <div class="message alert alert-danger text-center flex-grow-1">
+                    <div class="my-alert message alert text-center flex-grow-1 {{session('alert-type')}}">
                         <span>{{session('message')}}</span>
                     </div>
                     @endif

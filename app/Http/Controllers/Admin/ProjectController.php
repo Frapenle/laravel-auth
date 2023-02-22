@@ -15,12 +15,12 @@ class ProjectController extends Controller
         'name' => ['required', 'unique:projects,name', 'max: 25'],
         'description' => ['max: 1000'],
         'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
-        'update' => ['date', 'after: start_date', 'before:today'],
+        'update' => ['date', 'after: start_date', 'before:today', 'nullable'],
         'preview' => ['max: 255'],
         'authors' => ['required', 'max: 255', 'min: 2'],
-        'license' => ['max:255'],
-        'program_lang' => ['min: 2', 'max: 100'],
-        'frameworks' => ['min: 2', 'max: 100'],
+        'license' => ['min:2', 'max:255', 'nullable'],
+        'program_lang' => ['min: 2', 'max: 100', 'nullable'],
+        'frameworks' => ['min: 2', 'max: 100', 'nullable'],
         'github_url' => ['max: 255', 'url']
     ];
     /**
@@ -105,7 +105,8 @@ class ProjectController extends Controller
         //richiedo validazione con le nuove regole
         $request->validate($newRules);
         $project->update($data);
-        return redirect()->route('admin.projects.index');
+        $message = "{$project->name} è stato modificato";
+        return redirect()->route('admin.projects.index')->with('message', $message)->with('alert-type', 'alert-success');
     }
 
     /**
@@ -118,7 +119,7 @@ class ProjectController extends Controller
     {
         $project->delete();
         $message = "{$project->name} è stato eliminato";
-        return view('admin.projects.resources.index')->with('message', $message);
+        return redirect()->route('admin.projects.index')->with('message', $message)->with('alert-type', 'alert-danger');
     }
 
     public function restoreDeleted($id)
@@ -126,7 +127,7 @@ class ProjectController extends Controller
         $project = Project::onlyTrashed()->find($id);
         $project->restore();
         $message = "{$project->name} è stato ripristinato";
-        return redirect()->route('admin.projects.trashed')->with('message', $message);
+        return redirect()->route('admin.projects.trashed')->with('message', $message)->with('alert-type', 'alert-primary');
     }
 
     public function trashed()
@@ -140,8 +141,7 @@ class ProjectController extends Controller
     {
         $project = Project::onlyTrashed()->find($id);
         $project->forceDelete();
-        $message = "{$project->name} è stato ripristinato";
-        $message = "{$project->title} è stato eliminato dal db";
-        return redirect()->route('admin.trashed')->with('message', $message);
+        $message = "{$project->name} è stato eliminato dal database";
+        return redirect()->route('admin.projects.trashed')->with('message', $message)->with('alert-type', 'alert-danger');
     }
 }
