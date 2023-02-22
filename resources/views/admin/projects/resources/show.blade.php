@@ -10,13 +10,20 @@
                 <p><span class="fw-bold">Description</span>: {{$project->description}} </p>
                 <p><span class="fw-bold">Preview</span>: {{$project->preview}} </p>
                 <p><span class="fw-bold">Authors</span>: {{$project->authors}} </p>
-                <p><span class="fw-bold">Licence</span>: {{$project->licence}} </p>
+                <p><span class="fw-bold">License</span>: {{$project->license}} </p>
                 <p><span class="fw-bold">Languages</span>: {{$project->program_lang}} </p>
                 <p><span class="fw-bold">Frameworks</span>: {{$project->frameworks}} </p>
                 <p><span class="fw-bold">Github link</span>: {{$project->github_url}} </p>
                 <p><span class="fw-bold">Creation date</span>: {{$project->start_date}} </p>
                 <p><span class="fw-bold">Last update</span>: {{$project->update}} </p>
                 {{-- inserire pulsanti --}}
+                <form action="{{route('admin.project.destroy', $project->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                    <a class="btn btn-warning btn-sm" href="{{route('admin.project.edit', $project->id)}}">Edit</a>
+                    <button type="submit" class="btn btn-danger btn-sm" href="{{route('admin.project.destroy', $project->id)}}" onclick="return confirm('Attenzione, sei sicuro di voler eliminare questo record?')">Delete</button>
+                    <a href="{{route('admin.project.index')}}" class="btn btn-primary btn-sm">Back</a>
+            </form>
             </div>
         </div>
     </div>

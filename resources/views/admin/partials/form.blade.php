@@ -19,8 +19,8 @@
         <input name="authors" type="text" class="form-control" id="authors" value={{ old('title', $project->authors) }}>
     </div>
     <div class="mb-4">
-        <label for="licence" class="form-label">Lincence</label>
-        <input name="licence" type="text" class="form-control" id="licence" value={{ old('title', $project->licence) }}>
+        <label for="license" class="form-label">Lincense</label>
+        <input name="license" type="text" class="form-control" id="license" value={{ old('title', $project->license) }}>
     </div>
     <div class="mb-4">
         <label for="program_lang" class="form-label">Languages</label>

@@ -8,6 +8,20 @@ use App\Models\Project;
 
 class ProjectsController extends Controller
 {
+    // <<<<<<<<< validation rules >>>>>>>>>>>>
+    // ======== da aggiornare =========
+    protected $rules = [
+        'name' => ['required', 'unique', 'max: 25'],
+        'description' => ['max: 1000'],
+        'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
+        'update' => ['datetime', 'after: start_date', 'before:today', 'required'],
+        'preview' => ['max: 255', 'default: Preview non disponibile'],
+        'authors' => ['required', 'max: 255', 'min: 2'],
+        'license' => ['min: 2', 'max:255'],
+        'program_lang' => ['min: 2', 'max: 100'],
+        'frameworks' => ['min: 2', 'max: 100'],
+        'github_url' => ['max: 255', 'url']
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +39,9 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        //
+        return view('admin.projects.resources.create', compact('project'));
     }
 
     /**
@@ -38,7 +52,17 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // variable request all
+        $data = $request->all();
+
+        // request validation rules -> top of the page
+        $request->validate($this->rules);
+
+        //create new book
+        $newProject = new Project();
+        $newProject->fill($data);
+        $newProject->save();
+        return redirect()->route('admin.projects.resources.index');
     }
 
     /**
@@ -72,7 +96,15 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        //salvo tutti i dati nella variabile data
+        $data = $request->all();
+        //creo nuova regola per i campi unique della validation aggiungendola a quelle gia esistenti
+        $newRules = $this->rules;
+        $newRules['name'] = ['required', 'unique', 'max: 25', Rule::unique('projects')->ignore('$project->name')];
+        //richiedo validazione con le nuove regole
+        $request->validate($newRules);
+        $project->update($data);
+        return redirect() - route('admin.projects.resources.index');
     }
 
     /**
