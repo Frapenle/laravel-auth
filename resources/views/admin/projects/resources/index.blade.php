@@ -19,22 +19,41 @@
 @section('content')
 <section id="index">
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                {{-- Inserire checkbox --}}
+
+            </div>
+        </div>
         <div class="row w-100 mt-2">
             <div class="col-12">
                 <table class="table table-striped table-hover table-warning">
-                    <thead class="table-success-dark">
+                    <thead class="table-success-dark text-small-th">
                         <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Preview</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Authors</th>
-                        <th scope="col">License</th>
-                        <th scope="col">Languages</th>
-                        <th scope="col">Frameworks</th>
-                        <th scope="col">Github link</th>
-                        {{-- <th scope="col">Date creation</th> --}}
-                        <th scope="col">Updated</th>
+                        <th scope="col">
+                            <a class="text-primary text-decoration-none" href="{{ route('admin.projects.index', ['sort' => 'id', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
+                                Id @if ($sort == 'id')
+                                @if ($direction == 'asc')
+                                    <i class="fas fa-sort-up"></i>
+                                @else
+                                    <i class="fas fa-sort-down"></i>
+                                @endif
+                                @else
+                                <i class="fas fa-sort"></i>
+                                @endif
+                            </a>
+                        </th>
+
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=preview')}}"> Preview</a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=name')}}"> Name</a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=description')}}"> Description</a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=authors')}}"> Authors</a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=license')}}"> License</a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=program_lang')}}"> Languages</a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=frameworks')}}"> Frameworks</a></th>
+                        <th scope="col"><span class="text-primary fst-italic">Github link</span></th>
+                        {{-- <th scope="col"<a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=id')}}"> Date creation</a></th> --}}
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=update')}}"> Updated</a></th>
                         <th scope="col" class="text-center" style="width: 250px;">Action</th>
                         </tr>
                     </thead>

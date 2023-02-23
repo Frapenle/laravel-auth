@@ -28,14 +28,22 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
-        // metodo per visualizzare il  numero di elementi nel btn cestino
-        $trashed = Project::onlyTrashed()->get()->count();
+        //You may pass a default value as the second argument to the input method.
+        //This value will be returned if the requested input value is not present on the request
+        $sort = $request->input('sort', 'id');
+        $direction = $request->input('direction', 'asc');
 
-        return view('admin.projects.resources.index', compact('projects', 'trashed'));
+        $projects = Project::query()
+            ->when($sort, function ($query) use ($sort, $direction) {
+                $query->orderBy($sort, $direction);
+            })->get();
+
+        $trashed = Project::onlyTrashed()->count();
+        return view('admin.projects.resources.index', compact('projects', 'trashed', 'sort', 'direction'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -61,7 +69,7 @@ class ProjectController extends Controller
         // request validation rules -> top of the page
         $request->validate($this->rules);
 
-        //create new book
+        //create new project
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
@@ -146,4 +154,12 @@ class ProjectController extends Controller
         $message = "{$project->name} è stato eliminato dal database";
         return redirect()->route('admin.projects.trashed')->with('message', $message)->with('alert-type', 'alert-danger');
     }
+
+    // public function toggle(Project $project)
+    // {
+    //     $project->show = !$project->show;
+    //     $project->save();
+
+    //     return back();
+    // }
 }
