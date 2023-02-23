@@ -108,6 +108,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        //prova della lingua italiana sulla index
         App::setLocale('it');
         //salvo tutti i dati nella variabile data
         $data = $request->all();
