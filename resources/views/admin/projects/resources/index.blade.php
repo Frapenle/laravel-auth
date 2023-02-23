@@ -30,16 +30,16 @@
                 <table class="table table-striped table-hover table-warning">
                     <thead class="table-success-dark text-small-th">
                         <tr>
-                        <th scope="col">
+                        <th scope="col" class="" style="min-width: 50px;">
                             <a class="text-primary text-decoration-none" href="{{ route('admin.projects.index', ['sort' => 'id', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
                                 Id @if ($sort == 'id')
-                                @if ($direction == 'asc')
-                                    <i class="fas fa-sort-up"></i>
+                                    @if ($direction == 'asc')
+                                        <i class="fas fa-sort-up fa-xs"></i>
+                                    @else
+                                        <i class="fas fa-sort-down fa-xs"></i>
+                                    @endif
                                 @else
-                                    <i class="fas fa-sort-down"></i>
-                                @endif
-                                @else
-                                <i class="fas fa-sort"></i>
+                                <i class="fas fa-sort fa-xs"></i>
                                 @endif
                             </a>
                         </th>

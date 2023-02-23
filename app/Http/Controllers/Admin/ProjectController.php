@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
 
 class ProjectController extends Controller
 {
@@ -107,6 +108,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        App::setLocale('it');
         //salvo tutti i dati nella variabile data
         $data = $request->all();
         //creo nuova regola per i campi unique della validation aggiungendola a quelle gia esistenti
