@@ -19,7 +19,7 @@ class ProjectController extends Controller
         'description' => ['max: 1000'],
         'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
         'update' => ['date', 'after: start_date', 'before:today', 'nullable'],
-        'preview' => ['file', 'max:2000', 'mimes:jpg, jpeg, png'],
+        'preview' => ['image', 'max:2000'],
         'authors' => ['required', 'max: 255', 'min: 2'],
         'license' => ['min:2', 'max:255', 'nullable'],
         'program_lang' => ['min: 2', 'max: 100', 'nullable'],
@@ -120,7 +120,7 @@ class ProjectController extends Controller
         $data = $request->all();
         //creo nuova regola per i campi unique della validation aggiungendola a quelle gia esistenti
         $newRules = $this->rules;
-        $newRules['name'] = ['required', Rule::unique('projects')->ignore($project->name), 'max: 25'];
+        $newRules['name'] = ['required', Rule::unique('projects')->ignore($project->id), 'max: 25'];
         //richiedo validazione con le nuove regole
         $request->validate($newRules);
         $project->update($data);
