@@ -19,7 +19,7 @@ class ProjectController extends Controller
         'description' => ['max: 1000'],
         'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
         'update' => ['date', 'after: start_date', 'before:today', 'nullable'],
-        // 'preview' => ['max: 255'],
+        'preview' => ['file', 'max:2000', 'mimes:jpg, jpeg, png'],
         'authors' => ['required', 'max: 255', 'min: 2'],
         'license' => ['min:2', 'max:255', 'nullable'],
         'program_lang' => ['min: 2', 'max: 100', 'nullable'],
@@ -78,7 +78,7 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         //store upload preview img
-        $newProject->preview = Storage::put('uploads', $data['preview']);
+        $newProject->preview = Storage::put('img/uploads', $data['preview']);
         $newProject->save();
         return redirect()->route('admin.projects.index');
     }
