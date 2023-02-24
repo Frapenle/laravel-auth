@@ -1,5 +1,5 @@
 
-<form id="{{$idForm}}" action="{{route($route, $project->id)}}" method="POST" class="mb-3" name={{$idForm}}>
+<form id="{{$idForm}}" action="{{route($route, $project->id)}}" method="POST" class="mb-3" name={{$idForm}} enctype="multipart/form-data">
 @csrf
 @method($method)
 
@@ -26,7 +26,7 @@
     </div>
     <div class="mb-4">
         <label for="preview" class="form-label">Preview</label>
-        <input name="preview" type="text" class="form-control" id="preview" value={{ old('preview', $project->preview) }}>
+        <input name="preview" type="file" class="form-control" id="preview" value={{ old('preview', $project->preview) }}>
     </div>
     <div class="mb-4">
         <label for="authors" class="form-label">Authors</label>
