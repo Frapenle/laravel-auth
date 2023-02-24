@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProjectController extends Controller
 {
@@ -17,7 +19,7 @@ class ProjectController extends Controller
         'description' => ['max: 1000'],
         'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
         'update' => ['date', 'after: start_date', 'before:today', 'nullable'],
-        'preview' => ['max: 255'],
+        // 'preview' => ['max: 255'],
         'authors' => ['required', 'max: 255', 'min: 2'],
         'license' => ['min:2', 'max:255', 'nullable'],
         'program_lang' => ['min: 2', 'max: 100', 'nullable'],
@@ -64,6 +66,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
+
         // variable request all
         $data = $request->all();
 
@@ -73,6 +77,8 @@ class ProjectController extends Controller
         //create new project
         $newProject = new Project();
         $newProject->fill($data);
+        //store upload preview img
+        $newProject->preview = Storage::put('uploads', $data['preview']);
         $newProject->save();
         return redirect()->route('admin.projects.index');
     }
@@ -165,4 +171,6 @@ class ProjectController extends Controller
 
     //     return back();
     // }
+
+
 }
