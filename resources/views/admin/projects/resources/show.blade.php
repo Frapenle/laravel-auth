@@ -8,7 +8,11 @@
                 <p><span class="fw-bold">Id</span>: {{$project->id}} </p>
                 <h4><span class="fw-bold">Name</span>: {{$project->name}} </h4>
                 <p><span class="fw-bold">Description</span>: {{$project->description}} </p>
-                <p><span class="fw-bold">Preview</span>: {{$project->preview}} </p>
+                <div class="card-img">
+                    <span class="fw-bold">Preview: </span>
+                    <img src="{{asset('storage/' . $project->preview)}}" alt="{{$project->name}} preview" class="" width="150">
+                </div>
+                {{-- <p><span class="fw-bold">Preview</span>: {{$project->preview}} </p> --}}
                 <p><span class="fw-bold">Authors</span>: {{$project->authors}} </p>
                 <p><span class="fw-bold">License</span>: {{$project->license}} </p>
                 <p><span class="fw-bold">Languages</span>: {{$project->program_lang}} </p>
