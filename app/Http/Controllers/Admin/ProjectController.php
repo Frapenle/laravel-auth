@@ -114,6 +114,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
         //prova della lingua italiana sulla index
         App::setLocale('it');
         //salvo tutti i dati nella variabile data
@@ -123,6 +124,12 @@ class ProjectController extends Controller
         $newRules['name'] = ['required', Rule::unique('projects')->ignore($project->id), 'max: 25'];
         //richiedo validazione con le nuove regole
         $request->validate($newRules);
+        //cancellazione file dal db se viene cambiata l'immagine
+        if ($request->hasFile('preview')) {
+            $test = Storage::delete($project->preview);
+            $data['preview'] =  Storage::put('img/uploads', $data['preview']);
+            // dd('$project->preview');
+        };
         $project->update($data);
         $message = "{$project->name} è stato modificato";
         return redirect()->route('admin.projects.index')->with('message', $message)->with('alert-type', 'alert-success');
@@ -159,6 +166,7 @@ class ProjectController extends Controller
     public function forceDelete($id)
     {
         $project = Project::onlyTrashed()->find($id);
+        Storage::delete($project->preview);
         $project->forceDelete();
         $message = "{$project->name} è stato eliminato dal database";
         return redirect()->route('admin.projects.trashed')->with('message', $message)->with('alert-type', 'alert-danger');
