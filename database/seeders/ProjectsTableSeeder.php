@@ -36,7 +36,7 @@ class ProjectsTableSeeder extends Seeder
                 'description' => fake()->text(1000),
                 'start_date' => fake()->dateTime(),
                 'update' => fake()->dateTime(),
-                'preview' => 'placeholder-300x300.jpeg',
+                'preview' => 'img/placeholder-300x300.jpeg',
                 'authors' => fake()->name(),
                 'license' => fake()->randomElement(['Open Source', 'Creative Commons', 'Shareware', 'Freeware', null]),
                 'program_lang' => fake()->randomElement(['PHP', 'JavaScript', 'Python', 'C', 'Java', 'C++', 'Ruby', 'Swift', 'Rust', 'Kotlin', 'Go', null]),

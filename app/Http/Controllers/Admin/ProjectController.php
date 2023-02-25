@@ -81,7 +81,7 @@ class ProjectController extends Controller
         if ($request->hasFile('preview')) {
             $newProject->preview = Storage::put('img/uploads', $data['preview']);
         } else {
-            $newProject->preview = 'placeholder-300x300';
+            $newProject->preview = 'img/placeholder-300x300';
         }
         $newProject->save();
         return redirect()->route('admin.projects.index');
@@ -130,9 +130,8 @@ class ProjectController extends Controller
         $request->validate($newRules);
         //cancellazione file dal db se viene cambiata l'immagine
         if ($request->hasFile('preview')) {
-            $test = Storage::delete($project->preview);
+            Storage::delete($project->preview);
             $data['preview'] =  Storage::put('img/uploads', $data['preview']);
-            // dd('$project->preview');
         };
         $project->update($data);
         $message = "{$project->name} è stato modificato";
