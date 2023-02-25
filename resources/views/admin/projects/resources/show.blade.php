@@ -10,7 +10,7 @@
                 <p><span class="fw-bold">Description</span>: {{$project->description}} </p>
                 <div class="card-img">
                     <span class="fw-bold">Preview: </span>
-                    <img src="{{asset('storage/' . $project->preview)}}" alt="{{$project->name}} preview" class="" width="150">
+                    <img src="{{asset('storage/' . $project->preview)}}" alt="{{$project->name}} preview image" class="" width="150">
                 </div>
                 {{-- <p><span class="fw-bold">Preview</span>: {{$project->preview}} </p> --}}
                 <p><span class="fw-bold">Authors</span>: {{$project->authors}} </p>
