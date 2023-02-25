@@ -29,10 +29,10 @@ return new class extends Migration
              */
             $table->id();
             $table->string('name', 25)->unique();
-            $table->text('description', 1000);
+            $table->text('description', 1000)->nullable();
             $table->date('start_date');
-            $table->datetime('update');
-            $table->string('preview', 255);
+            $table->datetime('update')->nullable();
+            $table->string('preview', 255)->nullable();
             $table->string('authors', 255);
             $table->string('license', 255)->nullable();
             $table->string('program_lang', 100)->nullable();

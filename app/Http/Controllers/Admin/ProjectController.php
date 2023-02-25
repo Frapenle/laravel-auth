@@ -16,10 +16,10 @@ class ProjectController extends Controller
     // ======== da aggiornare =========
     protected $rules = [
         'name' => ['required', 'unique:projects,name', 'max: 25'],
-        'description' => ['max: 1000'],
+        'description' => ['max: 1000', 'nullable'],
         'start_date' => ['date', 'after: 1990-01-01', 'before:today', 'required'],
         'update' => ['date', 'after: start_date', 'before:today', 'nullable'],
-        'preview' => ['image', 'max:2000'],
+        'preview' => ['image', 'max:2000', 'nullable'],
         'authors' => ['required', 'max: 255', 'min: 2'],
         'license' => ['min:2', 'max:255', 'nullable'],
         'program_lang' => ['min: 2', 'max: 100', 'nullable'],
@@ -78,7 +78,11 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         //store upload preview img
-        $newProject->preview = Storage::put('img/uploads', $data['preview']);
+        if ($request->hasFile('preview')) {
+            $newProject->preview = Storage::put('img/uploads', $data['preview']);
+        } else {
+            $newProject->preview = 'placeholder-300x300';
+        }
         $newProject->save();
         return redirect()->route('admin.projects.index');
     }
@@ -171,14 +175,4 @@ class ProjectController extends Controller
         $message = "{$project->name} è stato eliminato dal database";
         return redirect()->route('admin.projects.trashed')->with('message', $message)->with('alert-type', 'alert-danger');
     }
-
-    // public function toggle(Project $project)
-    // {
-    //     $project->show = !$project->show;
-    //     $project->save();
-
-    //     return back();
-    // }
-
-
 }
