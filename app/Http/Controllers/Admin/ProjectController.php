@@ -24,7 +24,7 @@ class ProjectController extends Controller
         'license' => ['min:2', 'max:255', 'nullable'],
         'program_lang' => ['min: 2', 'max: 100', 'nullable'],
         'frameworks' => ['min: 2', 'max: 100', 'nullable'],
-        'github_url' => ['max: 255', 'url']
+        'github_url' => ['max: 255', 'url', 'nullable']
     ];
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class ProjectController extends Controller
     {
         //You may pass a default value as the second argument to the input method.
         //This value will be returned if the requested input value is not present on the request
-        $sort = $request->input('sort', 'id');
+        $sort = $request->input('sort');
         $direction = $request->input('direction', 'asc');
 
         $projects = Project::query()

@@ -27,12 +27,14 @@
         </div>
         <div class="row w-100 mt-2">
             <div class="col-12">
+                {{-- =========== table head ========= --}}
                 <table class="table table-striped table-hover table-warning">
                     <thead class="table-success-dark text-small-th">
                         <tr>
-                        <th scope="col" class="" style="min-width: 50px;">
-                            <a class="text-primary text-decoration-none" href="{{ route('admin.projects.index', ['sort' => 'id', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">
-                                Id @if ($sort == 'id')
+                            {{-- columns with arrow up/down --}}
+                        <th scope="col" class="" style="min-width: 50px">
+                            <a class="text-primary text-decoration-none" href="{{ route('admin.projects.index', ['sort' => 'id', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">Id 
+                                @if ($sort == 'id')
                                     @if ($direction == 'asc')
                                         <i class="fas fa-sort-up fa-xs"></i>
                                     @else
@@ -44,33 +46,125 @@
                             </a>
                         </th>
 
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=preview')}}"> Preview</a></th>
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=name')}}"> Name</a></th>
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=description')}}"> Description</a></th>
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=authors')}}"> Authors</a></th>
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=license')}}"> License</a></th>
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=program_lang')}}"> Languages</a></th>
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=frameworks')}}"> Frameworks</a></th>
-                        <th scope="col"><span class="text-primary fst-italic">Github link</span></th>
-                        {{-- <th scope="col"<a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=id')}}"> Date creation</a></th> --}}
-                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', 'sort=update')}}"> Updated</a></th>
-                        <th scope="col" class="text-center" style="width: 250px;">Action</th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'preview', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">Preview 
+                            @if ($sort == 'preview')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif
+                        </a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'name', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">Name 
+                            Id @if ($sort == 'name')
+                                    @if ($direction == 'asc')
+                                        <i class="fas fa-sort-up fa-xs"></i>
+                                    @else
+                                        <i class="fas fa-sort-down fa-xs"></i>
+                                    @endif
+                                @else
+                                <i class="fas fa-sort fa-xs"></i>
+                                @endif
+                        </a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'description', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">Description 
+                            @if ($sort == 'description')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif
+                        </a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'authors', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">Authors 
+                            @if ($sort == 'authors')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif
+                        </a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'license', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">License 
+                            @if ($sort == 'license')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif
+                        </a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index',['sort' => 'program_lang', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">L.P.
+                            @if ($sort == 'program_lang')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif
+                        </a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'frameworks', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">Fw
+                            @if ($sort == 'frameworks')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif
+                        </a></th>
+                        <th scope="col"><span class="text-primary fst-italic">Github</span></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'start_date', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">Created 
+                            @if ($sort == 'start_date')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif    
+                        </a></th>
+                        <th scope="col"><a class="text-primary text-decoration-none" href="{{route('admin.projects.index', ['sort' => 'update', 'direction' => $direction == 'asc' ? 'desc' : 'asc'])}}">Updated 
+                            @if ($sort == 'update')
+                                @if ($direction === 'asc')
+                                <i class="fas fa-sort-up fa-xs"></i>
+                                @else
+                                <i class="fas fa-sort-down fa-xs"></i>
+                                @endif
+                            @else
+                            <i class="fas fa-sort fa-xs"></i>
+                            @endif
+                        </a></th>
+                        <th scope="col" class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody class="text-small">
                         @forelse ($projects as $project)
                             <tr>
                                 <th scope="row"> {{$project->id}} </th>
-                                <td class="text-truncate" style="max-width: 150px;"> {{$project->preview}} </td>
-                                <td> {{$project->name}} </td>
-                                <td class="text-truncate" style="max-width: 200px;"> {{$project->description}} </td>
-                                <td style="max-width: 200px;"> {{$project->authors}} </td>
+                                <td class="text-truncate" style="max-width: 100px">
+                                    <img src="{{(Storage::exists($project->preview)) ? asset('storage/' . $project->preview) : asset('placeholders/' . $project->preview)}}" alt="{{$project->name}} preview image" class="" width="80">
+                                </td>
+                                <td style="min-width: 100px"> {{$project->name}} </td>
+                                <td class="text-truncate" style="max-width: 200px"> {{$project->description}} </td>
+                                <td style="max-width: 200px"> {{$project->authors}} </td>
                                 <td> {{$project->license}} </td>
                                 <td> {{$project->program_lang}} </td>
                                 <td> {{$project->frameworks}} </td>
-                                <td class="text-truncate" style="max-width: 100px;"><a href="#">{{$project->github_url}}</a></td>
-                                {{-- <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->start_date)->format('Y-m-d') }} </td> --}}
-                                <td class="text-truncate" style="max-width: 300px;"> {{ \Carbon\Carbon::parse($project->update)->format('Y-m-d  H:i') }} </td>
+                                <td class="text-truncate" style="max-width: 100px"><a href="#">{{$project->github_url}}</a></td>
+                                <td class="text-truncate" style="max-width: 300px"> {{ \Carbon\Carbon::parse($project->start_date)->format('Y-m-d') }} </td>
+                                <td class="text-truncate" style="max-width: 300px"> {{ \Carbon\Carbon::parse($project->update)->format('Y-m-d  H:i') }} </td>
                                 <td style="width: 250px;" class="text-end">
                                     <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="delete">
                                         @csrf
