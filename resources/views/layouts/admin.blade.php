@@ -50,7 +50,10 @@
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/admin/projects/') }}">Projects</a>
+                            <a class="nav-link {{ str_starts_with(Route::currentRouteName(), 'admin.projects') ? 'active' : '' }}" href="{{url('/admin/projects/') }}">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled {{ str_starts_with(Route::currentRouteName(), 'admin.contacts') ? 'active' : '' }}" href="{{url('/admin/contacts/') }}">Contacts</a>
                         </li>
                     </ul>
 
